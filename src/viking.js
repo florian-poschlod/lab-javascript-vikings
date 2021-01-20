@@ -65,21 +65,27 @@ class War {
   }
 
   vikingAttack() {
-    let randomViking = Math.floor(Math.random() * this.vikingArmy.length);
-    let randomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
-    let combat = this.saxonArmy[randomSaxon].receiveDamage(this.vikingArmy[randomViking].strength);
+    let randomSoldier = Math.floor(Math.random() * this.vikingArmy.length);
+    let combat = this.saxonArmy[randomSoldier].receiveDamage(this.vikingArmy[randomSoldier].strength);
     this.saxonArmy = this.saxonArmy.filter(saxon => saxon.health > 0);
     return combat;
   }
 
   saxonAttack() {
-    let randomViking = Math.floor(Math.random() * this.vikingArmy.length);
-    let randomSaxon = Math.floor(Math.random() * this.saxonArmy.length);
-    let combat = this.vikingArmy[randomViking].receiveDamage(this.saxonArmy[randomSaxon].strength);
+    let randomSoldier = Math.floor(Math.random() * this.vikingArmy.length);
+    let combat = this.vikingArmy[randomSoldier].receiveDamage(this.saxonArmy[randomSoldier].strength);
     this.vikingArmy = this.vikingArmy.filter(viking => viking.health > 0);
     return combat;
   }
 
+  // Proposal for unifying the attack funtions
+  combat(attackingArmy, defendingArmy) {
+    let randomSoldier = Math.floor(Math.random() * this.vikingArmy.length);
+    let combat = this.defendingArmy[randomSoldier].receiveDamage(this.attackingArmy[randomSoldier].strength);
+    this.defendingArmy = this.defendingArmy.filter(soldier => soldier.health > 0);
+    return combat;
+  }
+  
   showStatus() {
     if (this.saxonArmy.length === 0) {
       return 'Vikings have won the war of the century!';
